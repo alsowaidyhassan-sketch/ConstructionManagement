@@ -1,6 +1,7 @@
 Imports MaterialSkin
 Imports MaterialSkin.Controls
 Imports System.Windows.Forms
+Imports ConstructionManagement.WinForms.Services
 
 Namespace Forms
     Public Class LoginForm
@@ -15,14 +16,19 @@ Namespace Forms
             materialSkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
         End Sub
 
-        Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-            If txtUsername.Text = "admin" And txtPassword.Text = "admin" Then
+        Private Async Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+            Try
+                Dim loginData = New With { .UserName = txtUsername.Text, .Password = txtPassword.Text }
+                Dim response = Await ApiClient.PostAsync(Of Object)("auth/login", loginData)
+                
+                ApiClient.SetToken(response("token").ToString())
+                
                 Dim mainForm As New MainForm()
                 mainForm.Show()
                 Me.Hide()
-            Else
-                MessageBox.Show("Invalid credentials.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+            Catch ex As Exception
+                MessageBox.Show("خطأ في تسجيل الدخول. يرجى التأكد من اسم المستخدم وكلمة المرور.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End Sub
     End Class
 End Namespace

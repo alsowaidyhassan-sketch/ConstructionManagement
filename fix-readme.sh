@@ -1,3 +1,6 @@
+#!/bin/bash
+
+cat << 'README' > README.md
 # Construction Management System (CMS) - Production Ready
 
 نظام متكامل واحترافي لإدارة شركات البناء والمقاولات، مصمم ببنية معمارية نظيفة (Clean Architecture) وتم تصميمه ليكون **Production-Ready**.
@@ -47,3 +50,4 @@
 
 ## 🧪 الاختبارات (Unit Tests)
 - يوجد مشروع لاختبارات الـ Security والحد الأقصى للصور في `tests/ConstructionManagement.UnitTests`.
+README

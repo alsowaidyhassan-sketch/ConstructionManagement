@@ -1,6 +1,7 @@
 Imports MaterialSkin
 Imports MaterialSkin.Controls
 Imports System.Windows.Forms
+Imports ConstructionManagement.WinForms.Services
 
 Namespace Forms
     Public Class MainForm
@@ -8,17 +9,22 @@ Namespace Forms
 
         Public Sub New()
             InitializeComponent()
-            
             Dim materialSkinManager = MaterialSkinManager.Instance
             materialSkinManager.AddFormToManage(Me)
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT
-            materialSkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
         End Sub
         
-        Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            ' Load Dashboard Data
-            lblTotalProjects.Text = "إجمالي المشاريع: 15"
-            lblActiveProjects.Text = "المشاريع النشطة: 8"
+        Private Async Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            Try
+                Dim projects = Await ApiClient.GetAsync(Of Object)("projects")
+                dgvProjects.DataSource = projects
+            Catch ex As Exception
+                MessageBox.Show("خطأ في جلب البيانات.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Sub
+
+        Private Sub btnCustomers_Click(sender As Object, e As EventArgs) Handles btnCustomers.Click
+            Dim custForm As New CustomersForm()
+            custForm.ShowDialog()
         End Sub
     End Class
 End Namespace
