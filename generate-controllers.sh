@@ -1,3 +1,6 @@
+#!/bin/bash
+
+cat << 'CS' > src/Api/ConstructionManagement.Api/Controllers/ProjectsController.cs
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -96,3 +99,4 @@ namespace ConstructionManagement.Api.Controllers
         }
     }
 }
+CS

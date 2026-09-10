@@ -1,3 +1,6 @@
+#!/bin/bash
+
+cat << 'CS' > src/Infrastructure/Data/ApplicationDbContext.cs
 using Microsoft.EntityFrameworkCore;
 using ConstructionManagement.Domain.Entities.Core;
 using ConstructionManagement.Domain.Entities.Files;
@@ -166,3 +169,4 @@ namespace ConstructionManagement.Infrastructure.Data
         }
     }
 }
+CS
