@@ -1,3 +1,6 @@
+#!/bin/bash
+# Refactor ApiClient to be robust
+cat << 'VB' > src/Desktop/ConstructionManagement.WinForms/Services/ApiClient.vb
 Imports System.Net.Http
 Imports System.Net.Http.Headers
 Imports System.Text
@@ -89,3 +92,4 @@ Namespace Services
         End Function
     End Class
 End Namespace
+VB

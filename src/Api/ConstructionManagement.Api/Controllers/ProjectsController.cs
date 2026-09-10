@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ConstructionManagement.Infrastructure.Data;
 using System.Threading.Tasks;
-using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using System;
-using ConstructionManagement.Domain.Entities;
+using System.Linq;
+using ConstructionManagement.Application.Interfaces;
+using ConstructionManagement.Application.DTOs;
+using System.Collections.Generic;
 
 namespace ConstructionManagement.Api.Controllers
 {
@@ -14,41 +14,68 @@ namespace ConstructionManagement.Api.Controllers
     [Authorize]
     public class ProjectsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        public ProjectsController(ApplicationDbContext context) { _context = context; }
+        private readonly IProjectService _projectService;
 
-        [HttpGet]
-        public async Task<IActionResult> GetProjects()
+        public ProjectsController(IProjectService projectService) 
+        { 
+            _projectService = projectService; 
+        }
+
+        private (Guid? CustomerId, string UserType) GetContextContext()
         {
             var userType = User.Claims.FirstOrDefault(c => c.Type == "UserType")?.Value;
             var customerIdStr = User.Claims.FirstOrDefault(c => c.Type == "CustomerId")?.Value;
+            Guid? customerId = Guid.TryParse(customerIdStr, out var cid) ? cid : null;
+            return (customerId, userType);
+        }
 
-            var query = _context.Projects.Include(p => p.Customer).AsQueryable();
-
-            // Customer Isolation Security Rule
-            if (userType == "2" && !string.IsNullOrEmpty(customerIdStr) && Guid.TryParse(customerIdStr, out Guid customerId))
-            {
-                query = query.Where(p => p.CustomerId == customerId);
-            }
-
-            var projects = await query.ToListAsync();
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjects()
+        {
+            var ctx = GetContextContext();
+            var projects = await _projectService.GetProjectsAsync(ctx.CustomerId, ctx.UserType);
             return Ok(projects);
         }
 
-        [HttpPost("{projectId}/progress")]
-        public async Task<IActionResult> AddProgressUpdate(Guid projectId, [FromBody] ProgressUpdate update)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProjectDto>> GetProject(Guid id)
         {
-            if (update.Images != null && update.Images.Count > 5)
+            var ctx = GetContextContext();
+            try
             {
-                return BadRequest(new { Message = "يُسمح بحد أقصى 5 صور لكل تحديث إنجاز." });
+                var project = await _projectService.GetProjectByIdAsync(id, ctx.CustomerId, ctx.UserType);
+                if (project == null) return NotFound();
+                return Ok(project);
             }
-
-            update.ProjectId = projectId;
-            update.UpdateDate = DateTime.UtcNow;
+            catch (UnauthorizedAccessException)
+            {
+                return Forbid();
+            }
+        }
+        
+        [HttpPost("{id}/progress")]
+        public async Task<ActionResult<ProgressUpdateDto>> AddProgress(Guid id, [FromBody] ProgressUpdateDto dto)
+        {
+            if (id != dto.ProjectId) return BadRequest("Project ID mismatch.");
+            var ctx = GetContextContext();
             
-            _context.ProgressUpdates.Add(update);
-            await _context.SaveChangesAsync();
-            return Ok(update);
+            try
+            {
+                var result = await _projectService.AddProgressUpdateAsync(dto, ctx.CustomerId, ctx.UserType);
+                return Ok(result);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }

@@ -1,3 +1,5 @@
+#!/bin/bash
+cat << 'README' > README.md
 # Construction Management System (CMS) - API & Core Architecture Focus
 
 نظام إدارة شركات البناء والمقاولات المبني باستخدام تقنيات .NET، يتم العمل عليه ليكون **Production-Ready**.
@@ -30,3 +32,4 @@
 ## 🧪 الاختبارات
 - يوجد مشروع لاختبارات الـ Security والحد الأقصى للصور والـ Customer Isolation، مما يثبت صحة العمليات الحسابية والصلاحيات.
 
+README

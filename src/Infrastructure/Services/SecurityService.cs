@@ -12,10 +12,21 @@ namespace ConstructionManagement.Infrastructure.Services
     public class SecurityService : ISecurityService
     {
         private readonly string _secret;
+        private readonly string _issuer;
+        private readonly string _audience;
+        private readonly int _expiryMinutes;
 
         public SecurityService(IConfiguration configuration)
         {
-            _secret = configuration["JwtSettings:Secret"] ?? "FallbackSecretKeyThatShouldBeChangedInProdAtLeast32Bytes";
+            _secret = configuration["JwtSettings:Secret"];
+            if (string.IsNullOrWhiteSpace(_secret) || _secret.Length < 32)
+            {
+                throw new InvalidOperationException("CRITICAL: JWT Secret is not configured securely. It must be provided via environment variables and be at least 32 characters long.");
+            }
+            
+            _issuer = configuration["JwtSettings:Issuer"];
+            _audience = configuration["JwtSettings:Audience"];
+            _expiryMinutes = int.Parse(configuration["JwtSettings:ExpiryMinutes"] ?? "120");
         }
 
         public string HashPassword(string password)
@@ -42,7 +53,9 @@ namespace ConstructionManagement.Infrastructure.Services
                     new Claim("CustomerId", user.CustomerId?.ToString() ?? ""),
                     new Claim("UserType", user.UserType.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddHours(4),
+                Expires = DateTime.UtcNow.AddMinutes(_expiryMinutes),
+                Issuer = _issuer,
+                Audience = _audience,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = handler.CreateToken(descriptor);

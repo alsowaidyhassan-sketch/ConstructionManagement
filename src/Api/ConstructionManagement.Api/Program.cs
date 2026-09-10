@@ -1,4 +1,5 @@
 using System.Text;
+using System;
 using ConstructionManagement.Application.Interfaces;
 using ConstructionManagement.Infrastructure.Data;
 using ConstructionManagement.Infrastructure.Services;
@@ -36,7 +37,16 @@ builder.Services.AddScoped<IFileStorage, LocalFileStorageService>();
 builder.Services.AddScoped<IPaymentGateway, MockPaymentGateway>();
 builder.Services.AddScoped<IWhatsAppProvider, MockWhatsAppProvider>();
 
-var secret = builder.Configuration["JwtSettings:Secret"] ?? "FallbackSecretKeyThatShouldBeChangedInProdAtLeast32Bytes";
+// Inject Application Services (To be created)
+builder.Services.AddScoped<IProjectService, ConstructionManagement.Application.Services.ProjectService>();
+
+var secret = builder.Configuration["JwtSettings:Secret"];
+if (string.IsNullOrWhiteSpace(secret) || secret.Length < 32)
+{
+    // Fail fast on startup if security is compromised
+    throw new InvalidOperationException("CRITICAL: JWT Secret must be provided in configuration (environment variables) and be at least 32 characters long.");
+}
+
 var key = Encoding.ASCII.GetBytes(secret);
 
 builder.Services.AddAuthentication(x =>
@@ -46,14 +56,18 @@ builder.Services.AddAuthentication(x =>
 })
 .AddJwtBearer(x =>
 {
-    x.RequireHttpsMetadata = false; // In production this should be true if behind load balancer without SSL termination
+    x.RequireHttpsMetadata = true; // PRODUCTION SECURE: Enforce HTTPS
     x.SaveToken = true;
     x.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = false,
-        ValidateAudience = false
+        ValidateIssuer = true, // PRODUCTION SECURE
+        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+        ValidateAudience = true, // PRODUCTION SECURE
+        ValidAudience = builder.Configuration["JwtSettings:Audience"],
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
     };
 });
 
@@ -69,11 +83,5 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    // db.Database.Migrate(); // Migrations handled explicitly in deployment
-}
 
 app.Run();
