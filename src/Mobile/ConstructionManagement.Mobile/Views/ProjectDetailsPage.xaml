@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ConstructionManagement.Mobile.Views.ProjectDetailsPage"
+             Title="تفاصيل المشروع"
+             BackgroundColor="{StaticResource Background}"
+             FlowDirection="RightToLeft">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="فيلا الرمال" FontSize="22" FontAttributes="Bold" TextColor="{StaticResource Primary}" />
+                    <Label Text="رقم العقد: 1001" TextColor="Gray" />
+                    <Label Text="تاريخ البدء: 2024-01-01" TextColor="Gray" />
+                </VerticalStackLayout>
+            </Frame>
+            <Label Text="المراحل (Timeline)" FontSize="18" FontAttributes="Bold" />
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="1. الحفر والأساسات - مكتمل" TextColor="Green" />
+                    <Label Text="2. العظم والدور الأول - جاري العمل (60%)" TextColor="Orange" />
+                    <Label Text="3. التشطيبات - قيد الانتظار" TextColor="Gray" />
+                </VerticalStackLayout>
+            </Frame>
+            <Button Text="عرض الدفعات" BackgroundColor="{StaticResource Primary}" TextColor="White" Clicked="OnPaymentsClicked" CornerRadius="8" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

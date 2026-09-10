@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ConstructionManagement.Mobile.Views.PaymentsPage"
+             Title="سجل الدفعات"
+             BackgroundColor="{StaticResource Background}"
+             FlowDirection="RightToLeft">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15">
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*">
+                    <Label Grid.Row="0" Grid.Column="0" Text="الدفعة الأولى" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="50,000 ريال" HorizontalOptions="End" FontAttributes="Bold" />
+                    <Label Grid.Row="1" Grid.Column="0" Text="مدفوعة - تحويل بنكي" TextColor="Green" />
+                    <Label Grid.Row="1" Grid.Column="1" Text="2024-01-15" HorizontalOptions="End" TextColor="Gray" />
+                </Grid>
+            </Frame>
+            <Frame BackgroundColor="White" CornerRadius="10" Padding="15">
+                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,*">
+                    <Label Grid.Row="0" Grid.Column="0" Text="الدفعة الثانية" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="30,000 ريال" HorizontalOptions="End" FontAttributes="Bold" />
+                    <Label Grid.Row="1" Grid.Column="0" Text="بانتظار السداد" TextColor="Red" />
+                    <Label Grid.Row="1" Grid.Column="1" Text="مستحقة" HorizontalOptions="End" TextColor="Gray" />
+                    <Button Grid.Row="2" Grid.ColumnSpan="2" Margin="0,10,0,0" Text="دفع إلكتروني (Gateway)" BackgroundColor="{StaticResource Primary}" TextColor="White" />
+                </Grid>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
