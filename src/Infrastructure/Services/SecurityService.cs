@@ -4,13 +4,19 @@ using System.Security.Claims;
 using System.Text;
 using ConstructionManagement.Application.Interfaces;
 using ConstructionManagement.Domain.Entities;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ConstructionManagement.Infrastructure.Services
 {
     public class SecurityService : ISecurityService
     {
-        private readonly string _secret = "YourSuperSecretKeyForJwtAuthenticationMustBeAtLeast32BytesLength!";
+        private readonly string _secret;
+
+        public SecurityService(IConfiguration configuration)
+        {
+            _secret = configuration["JwtSettings:Secret"] ?? "FallbackSecretKeyThatShouldBeChangedInProdAtLeast32Bytes";
+        }
 
         public string HashPassword(string password)
         {

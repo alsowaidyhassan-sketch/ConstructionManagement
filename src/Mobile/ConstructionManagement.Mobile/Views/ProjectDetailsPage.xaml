@@ -2,18 +2,22 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ConstructionManagement.Mobile.Views.ProjectDetailsPage"
-             Title="تفاصيل المشروع"
+             Title="تفاصيل المشروع الشاملة"
              BackgroundColor="{StaticResource Background}"
              FlowDirection="RightToLeft">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
+            <!-- Project Info -->
             <Frame BackgroundColor="White" CornerRadius="10" Padding="15">
                 <VerticalStackLayout Spacing="10">
                     <Label Text="فيلا الرمال" FontSize="22" FontAttributes="Bold" TextColor="{StaticResource Primary}" />
-                    <Label Text="رقم العقد: 1001" TextColor="Gray" />
-                    <Label Text="تاريخ البدء: 2024-01-01" TextColor="Gray" />
+                    <Label Text="قيمة العقد: 1,500,000 ريال" TextColor="Gray" />
+                    <Label Text="الإنجاز الكلي: 45%" TextColor="Gray" />
+                    <ProgressBar Progress="0.45" ProgressColor="{StaticResource Primary}" />
                 </VerticalStackLayout>
             </Frame>
+            
+            <!-- Timeline & Stages -->
             <Label Text="المراحل (Timeline)" FontSize="18" FontAttributes="Bold" />
             <Frame BackgroundColor="White" CornerRadius="10" Padding="15">
                 <VerticalStackLayout Spacing="10">
@@ -22,7 +26,14 @@
                     <Label Text="3. التشطيبات - قيد الانتظار" TextColor="Gray" />
                 </VerticalStackLayout>
             </Frame>
-            <Button Text="عرض الدفعات" BackgroundColor="{StaticResource Primary}" TextColor="White" Clicked="OnPaymentsClicked" CornerRadius="8" />
+
+            <!-- Actions -->
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                <Button Grid.Row="0" Grid.Column="0" Text="الدفعات" BackgroundColor="{StaticResource Primary}" TextColor="White" Clicked="OnPaymentsClicked" CornerRadius="8" />
+                <Button Grid.Row="0" Grid.Column="1" Text="المستندات" BackgroundColor="Transparent" BorderColor="{StaticResource Primary}" BorderWidth="1" TextColor="{StaticResource Primary}" CornerRadius="8" />
+                <Button Grid.Row="1" Grid.Column="0" Text="الصور" BackgroundColor="Transparent" BorderColor="{StaticResource Primary}" BorderWidth="1" TextColor="{StaticResource Primary}" CornerRadius="8" />
+                <Button Grid.Row="1" Grid.Column="1" Text="أوامر التغيير" BackgroundColor="Transparent" BorderColor="{StaticResource Primary}" BorderWidth="1" TextColor="{StaticResource Primary}" CornerRadius="8" />
+            </Grid>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
