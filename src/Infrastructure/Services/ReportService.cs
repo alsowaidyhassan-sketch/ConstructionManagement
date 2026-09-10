@@ -7,7 +7,7 @@ using ConstructionManagement.Application.Interfaces;
 using ConstructionManagement.Application.DTOs;
 using ConstructionManagement.Infrastructure.Data;
 
-namespace ConstructionManagement.Application.Services
+namespace ConstructionManagement.Infrastructure.Services
 {
     public class ReportService : IReportService
     {

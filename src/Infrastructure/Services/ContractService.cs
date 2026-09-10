@@ -8,7 +8,7 @@ using ConstructionManagement.Application.DTOs;
 using ConstructionManagement.Infrastructure.Data;
 using ConstructionManagement.Domain.Entities.Projects;
 
-namespace ConstructionManagement.Application.Services
+namespace ConstructionManagement.Infrastructure.Services
 {
     public class ContractService : IContractService
     {

@@ -36,14 +36,14 @@ builder.Services.AddScoped<ISecurityService, SecurityService>();
 builder.Services.AddScoped<IFileStorage, LocalFileStorageService>();
 builder.Services.AddScoped<IPaymentGateway, MockPaymentGateway>();
 builder.Services.AddScoped<IWhatsAppProvider, MockWhatsAppProvider>();
-builder.Services.AddScoped<IContractService, ConstructionManagement.Application.Services.ContractService>();
-builder.Services.AddScoped<IChangeOrderService, ConstructionManagement.Application.Services.ChangeOrderService>();
-builder.Services.AddScoped<IFinanceService, ConstructionManagement.Application.Services.FinanceService>();
-builder.Services.AddScoped<IDocumentService, ConstructionManagement.Application.Services.DocumentService>();
-builder.Services.AddScoped<IReportService, ConstructionManagement.Application.Services.ReportService>();
+builder.Services.AddScoped<IContractService, ConstructionManagement.Infrastructure.Services.ContractService>();
+builder.Services.AddScoped<IChangeOrderService, ConstructionManagement.Infrastructure.Services.ChangeOrderService>();
+builder.Services.AddScoped<IFinanceService, ConstructionManagement.Infrastructure.Services.FinanceService>();
+builder.Services.AddScoped<IDocumentService, ConstructionManagement.Infrastructure.Services.DocumentService>();
+builder.Services.AddScoped<IReportService, ConstructionManagement.Infrastructure.Services.ReportService>();
 
 // Inject Application Services (To be created)
-builder.Services.AddScoped<IProjectService, ConstructionManagement.Application.Services.ProjectService>();
+builder.Services.AddScoped<IProjectService, ConstructionManagement.Infrastructure.Services.ProjectService>();
 
 var secret = builder.Configuration["JwtSettings:Secret"];
 if (string.IsNullOrWhiteSpace(secret) || secret.Length < 32)

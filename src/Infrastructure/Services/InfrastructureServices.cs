@@ -9,6 +9,7 @@ namespace ConstructionManagement.Infrastructure.Services
     public class LocalFileStorageService : IFileStorage
     {
         private readonly string _basePath;
+
         public LocalFileStorageService(IConfiguration config)
         {
             _basePath = config["FileStorage:BasePath"] ?? "Uploads";
@@ -34,12 +35,17 @@ namespace ConstructionManagement.Infrastructure.Services
 
     public class MockPaymentGateway : IPaymentGateway
     {
-        public Task<string> CreateTransactionAsync(decimal amount, string currency, string reference) => Task.FromResult(Guid.NewGuid().ToString());
-        public Task<bool> VerifyTransactionAsync(string transactionId) => Task.FromResult(true);
+        public Task<PaymentGatewayResult> ProcessPaymentAsync(decimal amount, string currency, string reference) 
+        {
+            return Task.FromResult(new PaymentGatewayResult { IsSuccess = true, TransactionId = Guid.NewGuid().ToString() });
+        }
+        
+        public Task<bool> VerifyWebhookSignatureAsync(string payload, string signature) => Task.FromResult(true);
     }
 
     public class MockWhatsAppProvider : IWhatsAppProvider
     {
-        public Task<bool> SendMessageAsync(string phone, string message) => Task.FromResult(true);
+        public Task<bool> SendMessageAsync(string phoneNumber, string message) => Task.FromResult(true);
+        public Task<bool> SendTemplateMessageAsync(string phoneNumber, string templateCode, object parameters) => Task.FromResult(true);
     }
 }

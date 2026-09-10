@@ -1,0 +1,2 @@
+#!/bin/bash
+find src -name "*.cs" -exec sed -i 's/using ConstructionManagement.Domain.Entities;/using ConstructionManagement.Domain.Entities.Core;\nusing ConstructionManagement.Domain.Entities.Files;\nusing ConstructionManagement.Domain.Entities.Finance;\nusing ConstructionManagement.Domain.Entities.Projects;\nusing ConstructionManagement.Domain.Entities.Security;\nusing ConstructionManagement.Domain.Entities.System;/g' {} +

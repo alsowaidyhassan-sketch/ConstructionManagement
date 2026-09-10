@@ -3,7 +3,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using ConstructionManagement.Application.Interfaces;
-using ConstructionManagement.Domain.Entities;
+using ConstructionManagement.Domain.Entities.Core;
+using ConstructionManagement.Domain.Entities.Files;
+using ConstructionManagement.Domain.Entities.Finance;
+using ConstructionManagement.Domain.Entities.Projects;
+using ConstructionManagement.Domain.Entities.Security;
+using ConstructionManagement.Domain.Entities.System;
+using ConstructionManagement.Domain.Entities.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 

@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 using Microsoft.EntityFrameworkCore;
-using ConstructionManagement.Application.Services;
+using ConstructionManagement.Infrastructure.Services;
 using ConstructionManagement.Application.DTOs;
 using ConstructionManagement.Infrastructure.Data;
 using ConstructionManagement.Domain.Entities.Projects;

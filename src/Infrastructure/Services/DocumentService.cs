@@ -9,7 +9,7 @@ using ConstructionManagement.Infrastructure.Data;
 using ConstructionManagement.Domain.Entities.Files;
 using System.IO;
 
-namespace ConstructionManagement.Application.Services
+namespace ConstructionManagement.Infrastructure.Services
 {
     public class DocumentService : IDocumentService
     {

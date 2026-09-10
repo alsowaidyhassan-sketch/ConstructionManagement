@@ -9,7 +9,7 @@ using ConstructionManagement.Infrastructure.Data;
 using ConstructionManagement.Domain.Entities.Projects;
 using ConstructionManagement.Domain.Entities.Files;
 
-namespace ConstructionManagement.Application.Services
+namespace ConstructionManagement.Infrastructure.Services
 {
     public class ProjectService : IProjectService
     {

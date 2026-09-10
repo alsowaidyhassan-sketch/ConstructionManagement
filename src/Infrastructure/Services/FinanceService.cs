@@ -9,7 +9,7 @@ using ConstructionManagement.Infrastructure.Data;
 using ConstructionManagement.Domain.Entities.Finance;
 using ConstructionManagement.Domain.Entities.Security;
 
-namespace ConstructionManagement.Application.Services
+namespace ConstructionManagement.Infrastructure.Services
 {
     public class FinanceService : IFinanceService
     {

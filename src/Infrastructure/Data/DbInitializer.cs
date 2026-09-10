@@ -1,6 +1,11 @@
 using System;
 using System.Linq;
-using ConstructionManagement.Domain.Entities;
+using ConstructionManagement.Domain.Entities.Core;
+using ConstructionManagement.Domain.Entities.Files;
+using ConstructionManagement.Domain.Entities.Finance;
+using ConstructionManagement.Domain.Entities.Projects;
+using ConstructionManagement.Domain.Entities.Security;
+using ConstructionManagement.Domain.Entities.System;
 using ConstructionManagement.Infrastructure.Services;
 
 namespace ConstructionManagement.Infrastructure.Data
