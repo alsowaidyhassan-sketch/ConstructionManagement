@@ -68,7 +68,7 @@ Namespace Services
                     Next
                 End If
                 
-                Dim fileBytes = Await File.ReadAllBytesAsync(filePath)
+                Dim fileBytes = Await Task.Run(Function() File.ReadAllBytes(filePath))
                 Dim fileContent = New ByteArrayContent(fileBytes)
                 fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream")
                 content.Add(fileContent, fileParamName, Path.GetFileName(filePath))
