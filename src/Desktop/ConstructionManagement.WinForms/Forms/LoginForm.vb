@@ -10,16 +10,16 @@ Namespace Forms
         Public Sub New()
             InitializeComponent()
             
-            Dim materialSkinManager = MaterialSkinManager.Instance
-            materialSkinManager.AddFormToManage(Me)
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT
-            materialSkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
+            Dim skinManager As MaterialSkinManager = MaterialSkinManager.Instance
+            skinManager.AddFormToManage(Me)
+            skinManager.Theme = MaterialSkinManager.Themes.LIGHT
+            skinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
         End Sub
 
         Private Async Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
             Try
-                Dim loginData = New With { .UserName = txtUsername.Text, .Password = txtPassword.Text }
-                Dim response = Await ApiClient.PostAsync(Of Object)("auth/login", loginData)
+                Dim loginData As Object = New With { .UserName = txtUsername.Text, .Password = txtPassword.Text }
+                Dim response = Await ApiClient.PostAsync(Of Newtonsoft.Json.Linq.JObject, Object)("auth/login", loginData)
                 
                 ApiClient.SetToken(response("token").ToString())
                 

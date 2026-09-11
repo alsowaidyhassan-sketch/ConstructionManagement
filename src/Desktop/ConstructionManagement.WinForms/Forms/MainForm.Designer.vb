@@ -1,3 +1,4 @@
+Namespace Forms
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class MainForm
     Inherits MaterialSkin.Controls.MaterialForm
@@ -128,3 +129,4 @@ Partial Class MainForm
     Friend WithEvents lblActiveProjects As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents dgvProjects As System.Windows.Forms.DataGridView
 End Class
+End Namespace

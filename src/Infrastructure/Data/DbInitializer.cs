@@ -21,7 +21,7 @@ namespace ConstructionManagement.Infrastructure.Data
                 return; // DB has been seeded
             }
 
-            var securityService = new SecurityService();
+             
 
             var admin = new User
             {

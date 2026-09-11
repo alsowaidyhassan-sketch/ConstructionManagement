@@ -8,8 +8,9 @@ Namespace Forms
         
         Public Sub New()
             InitializeComponent()
-            Dim materialSkinManager = MaterialSkin.MaterialSkinManager.Instance
-            materialSkinManager.AddFormToManage(Me)
+            Dim skinManager As MaterialSkin.MaterialSkinManager = MaterialSkin.MaterialSkinManager.Instance
+            skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT
+            skinManager.AddFormToManage(Me)
         End Sub
 
         Private Async Sub ContractsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load

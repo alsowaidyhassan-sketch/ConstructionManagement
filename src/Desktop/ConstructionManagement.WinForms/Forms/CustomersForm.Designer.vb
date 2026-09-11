@@ -1,3 +1,4 @@
+Namespace Forms
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class CustomersForm
     Inherits MaterialSkin.Controls.MaterialForm
@@ -76,3 +77,4 @@ Partial Class CustomersForm
     Friend WithEvents colPhone As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colStatus As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
+End Namespace
