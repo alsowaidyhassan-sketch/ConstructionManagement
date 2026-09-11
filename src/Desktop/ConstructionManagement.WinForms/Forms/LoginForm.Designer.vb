@@ -1,4 +1,3 @@
-Namespace Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
     Partial Class LoginForm
         Inherits MaterialSkin.Controls.MaterialForm
@@ -114,4 +113,3 @@ Namespace Forms
         Friend WithEvents btnLogin As MaterialSkin.Controls.MaterialButton
         Friend WithEvents lblTitle As MaterialSkin.Controls.MaterialLabel
     End Class
-End Namespace

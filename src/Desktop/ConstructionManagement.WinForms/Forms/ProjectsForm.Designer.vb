@@ -1,4 +1,3 @@
-Namespace Forms
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ProjectsForm
     Inherits MaterialSkin.Controls.MaterialForm
@@ -30,4 +29,3 @@ Partial Class ProjectsForm
     End Sub
 
 End Class
-End Namespace

@@ -3,7 +3,6 @@ Imports MaterialSkin.Controls
 Imports System.Windows.Forms
 Imports ConstructionManagement.WinForms.Services
 
-Namespace Forms
     Public Class LoginForm
         Inherits MaterialForm
 
@@ -31,4 +30,3 @@ Namespace Forms
             End Try
         End Sub
     End Class
-End Namespace

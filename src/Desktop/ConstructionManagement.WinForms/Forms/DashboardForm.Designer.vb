@@ -1,4 +1,3 @@
-Namespace Forms
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class DashboardForm
     Inherits MaterialSkin.Controls.MaterialForm
@@ -39,4 +38,3 @@ Partial Class DashboardForm
     Friend WithEvents lblTotalProjects As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents lblTotalPayments As MaterialSkin.Controls.MaterialLabel
 End Class
-End Namespace

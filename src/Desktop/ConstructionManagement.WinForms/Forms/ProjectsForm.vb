@@ -4,7 +4,6 @@ Imports MaterialSkin.Controls
 Imports Newtonsoft.Json
 Imports ConstructionManagement.WinForms.Services
 
-Namespace Forms
     Public Class ProjectsForm
         Inherits MaterialForm
 
@@ -25,4 +24,3 @@ Namespace Forms
             End Try
         End Function
     End Class
-End Namespace

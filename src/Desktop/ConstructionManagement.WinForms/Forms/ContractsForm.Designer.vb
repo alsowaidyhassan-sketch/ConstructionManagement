@@ -1,4 +1,3 @@
-Namespace Forms
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class ContractsForm
     Inherits MaterialSkin.Controls.MaterialForm
@@ -32,4 +31,3 @@ Partial Class ContractsForm
         Me.ResumeLayout(False)
     End Sub
 End Class
-End Namespace

@@ -3,7 +3,6 @@ Imports MaterialSkin.Controls
 Imports System.Windows.Forms
 Imports ConstructionManagement.WinForms.Services
 
-Namespace Forms
     Public Class MainForm
         Inherits MaterialForm
 
@@ -22,9 +21,8 @@ Namespace Forms
             End Try
         End Sub
 
-        Private Sub btnCustomers_Click(sender As Object, e As EventArgs) Handles btnCustomers.Click
+        Private Sub btnCustomers_Click(sender As Object, e As EventArgs) 
             Dim custForm As New CustomersForm()
             custForm.ShowDialog()
         End Sub
     End Class
-End Namespace

@@ -2,7 +2,6 @@ Imports MaterialSkin
 Imports MaterialSkin.Controls
 Imports System.Windows.Forms
 
-Namespace Forms
     Public Class CustomersForm
         Inherits MaterialForm
 
@@ -21,4 +20,3 @@ Namespace Forms
             dgvCustomers.Rows.Add("2", "مؤسسة البناء", "0500000001", "نشط")
         End Sub
     End Class
-End Namespace

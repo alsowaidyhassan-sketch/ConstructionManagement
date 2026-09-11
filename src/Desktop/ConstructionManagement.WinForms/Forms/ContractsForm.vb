@@ -2,7 +2,6 @@ Imports MaterialSkin.Controls
 Imports ConstructionManagement.WinForms.Services
 Imports System.Windows.Forms
 
-Namespace Forms
     Public Class ContractsForm
         Inherits MaterialForm
         
@@ -18,4 +17,3 @@ Namespace Forms
             lblStatus.Text = "جاهز لعرض العقود"
         End Sub
     End Class
-End Namespace

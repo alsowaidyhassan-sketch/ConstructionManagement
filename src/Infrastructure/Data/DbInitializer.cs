@@ -29,7 +29,7 @@ namespace ConstructionManagement.Infrastructure.Data
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
                 FullNameAr = "مدير النظام",
-                PasswordHash = securityService.HashPassword("Admin@123"),
+                PasswordHash = BCrypt.Net.BCrypt.EnhancedHashPassword("Admin@123", 13),
                 UserType = 1,
                 IsActive = true,
                 CreatedAtUtc = DateTime.UtcNow
