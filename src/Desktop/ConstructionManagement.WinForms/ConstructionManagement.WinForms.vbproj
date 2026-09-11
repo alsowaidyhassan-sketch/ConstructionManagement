@@ -2,9 +2,8 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net48</TargetFramework>
-    <StartupObject>ConstructionManagement.WinForms.ProgramModule</StartupObject>
+    <StartupObject>Sub Main</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
-    <MyType>WindowsForms</MyType>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
