@@ -38,13 +38,13 @@ namespace ConstructionManagement.Api.Controllers
                     var user = new User
                     {
                         UserName = "admin",
+                        NormalizedUserName = "ADMIN",
                         PasswordHash = _securityService.HashPassword("admin123"),
                         FullNameAr = "مدير النظام",
-                        FullNameEn = "System Admin",
                         Email = "admin@system.local",
                         IsActive = true,
-                        UserType = UserType.SystemAdmin,
-                        CreatedAt = DateTime.UtcNow
+                        UserType = 1, // 1: Employee/Admin
+                        CreatedAtUtc = DateTime.UtcNow
                     };
                     _context.Users.Add(user);
                     dataSeeded = true;
@@ -56,13 +56,14 @@ namespace ConstructionManagement.Api.Controllers
                     // Add Company
                     var company = new Company
                     {
-                        NameAr = "شركة البناء المتقدمة",
-                        NameEn = "Advanced Construction Co.",
+                        Name = "شركة البناء المتقدمة",
                         TaxNumber = "300123456789003",
-                        CommercialRegister = "1010123456",
+                        CommercialRecord = "1010123456",
                         Address = "الرياض - طريق الملك فهد",
+                        Phone = "0112345678",
+                        Email = "info@advanced.test",
                         IsActive = true,
-                        CreatedAt = DateTime.UtcNow
+                        CreatedAtUtc = DateTime.UtcNow
                     };
                     _context.Companies.Add(company);
                     await _context.SaveChangesAsync(); // Save to get the ID
@@ -71,52 +72,48 @@ namespace ConstructionManagement.Api.Controllers
                     var branch = new Branch
                     {
                         CompanyId = company.CompanyId,
-                        NameAr = "الفرع الرئيسي - الرياض",
-                        NameEn = "Main Branch - Riyadh",
-                        IsActive = true,
-                        CreatedAt = DateTime.UtcNow
+                        Name = "الفرع الرئيسي - الرياض",
+                        Location = "الرياض",
+                        IsActive = true
                     };
                     _context.Branches.Add(branch);
 
                     // Add Customer
                     var customer = new Customer
                     {
-                        NameAr = "مؤسسة الأفق للتطوير العقاري",
-                        NameEn = "Horizon Real Estate",
-                        PhoneNumber = "0501234567",
-                        Email = "info@horizon.test",
                         CompanyId = company.CompanyId,
-                        CustomerType = CustomerType.Corporate,
+                        CustomerCode = "CUST-001",
+                        FullNameAr = "مؤسسة الأفق للتطوير العقاري",
+                        Phone = "0501234567",
+                        Email = "info@horizon.test",
+                        Address = "الرياض",
                         IsActive = true,
-                        CreatedAt = DateTime.UtcNow
+                        CreatedAtUtc = DateTime.UtcNow
                     };
                     _context.Customers.Add(customer);
                     
                     // Add Contractor
                     var contractor = new Contractor
                     {
-                        NameAr = "مقاولات السريع",
-                        Specialty = "أعمال الحفر والأساسات",
-                        PhoneNumber = "0559876543",
                         CompanyId = company.CompanyId,
-                        IsActive = true,
-                        CreatedAt = DateTime.UtcNow
+                        Name = "مقاولات السريع",
+                        Specialization = "أعمال الحفر والأساسات",
+                        Phone = "0559876543",
+                        ContactPerson = "أحمد السريع",
+                        Email = "contractor@test.com",
+                        IsActive = true
                     };
                     _context.Contractors.Add(contractor);
-                    await _context.SaveChangesAsync(); // Save to get IDs
 
                     // Add Project Type
                     var projectType = new ProjectType
                     {
-                        NameAr = "مبنى تجاري",
-                        NameEn = "Commercial Building",
-                        Code = "COM-01",
                         CompanyId = company.CompanyId,
-                        IsActive = true
+                        Name = "مبنى تجاري"
                     };
                     _context.ProjectTypes.Add(projectType);
+                    
                     await _context.SaveChangesAsync();
-
                     dataSeeded = true;
                 }
 
