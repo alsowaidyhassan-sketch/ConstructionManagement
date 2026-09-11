@@ -2,7 +2,7 @@ Imports System.Windows.Forms
 Imports ConstructionManagement.WinForms.Forms
 
 Namespace ConstructionManagement.WinForms
-    Public Module Program
+    Public Module ProgramModule
         <STAThread>
         Public Sub Main()
             Application.EnableVisualStyles()
